@@ -4,9 +4,9 @@ export default function Login() {
         
         <div className="content-center">
 
-            <form className="border-4 border-white border-opacity-30 bg-green-900 shadow-md rounded-3xl px-16 pt-10 pb-10">
+            <form className="border-4 border-white border-opacity-30 bg-green-900 shadow-md rounded-3xl px-36 pt-20 pb-20">
 
-            <h1 className="mb-10 font-bold text-2xl text-white font-mono">Natour Master</h1>
+            <h1 className="mb-10 font-bold text-6xl text-white font-mono">Natour Master</h1>
 
             <label className="flex text-lg text-white font-bold font-mono">E-mail</label>
             <input placeholder="email@master.com" type="email" className="font-mono mb-10 shadow appearance-none border-2 border-white border-opacity-30 rounded w-full py-2 px-3
