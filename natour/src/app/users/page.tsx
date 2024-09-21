@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from 'next/navigation';
+import Menu from '../components/menu';
 
 export default function UserList() {
   const router = useRouter();
@@ -87,9 +88,11 @@ export default function UserList() {
         
       </div>
 
+      <Menu />
+
       <div className="flex-grow flex justify-center py-8">
         <div className="w-full">
-          <table className="min-w-full bg-white shadow-2xl ">
+          <table className="min-w-full bg-white shadow-2xl ml-32">
             <thead>
               <tr>
                 <th className="border-b-2 border-slate-600 px-4 py-2 text-left text-sm font-bold text-slate-900 pb-6">Nome</th>
