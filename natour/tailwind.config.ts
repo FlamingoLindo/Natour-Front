@@ -6,7 +6,6 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    "./public/page.tsx",  // Added this to match the old purge config
   ],
   theme: {
     extend: {
@@ -18,5 +17,4 @@ const config: Config = {
   },
   plugins: [],
 };
-
 export default config;
