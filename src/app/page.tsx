@@ -1,6 +1,6 @@
 export default function Login() {
     return (
-      <div className="bg-amber-100 min-h-screen flex justify-center text-center bg-cover bg-[url('https://static.scientificamerican.com/sciam/cache/file/D1E779C2-5585-48B9-B5B8CA83481D212C_source.jpg?w=1200')]">
+      <div className="bg-amber-100 min-h-screen flex justify-center text-center bg-cover bg-[url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm00MjItMDQ3LWtxOTJ3eDl5LmpwZw.jpg')]">
         
         <div className="content-center">
 
