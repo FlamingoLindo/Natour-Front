@@ -5,10 +5,6 @@ import Menu from '../components/menu';
 export default function UserList() {
   const router = useRouter();
 
-  const handleBackClick = () => {
-    router.push('/dashboard');
-  };
-
   const users = [
     {
       name: "Vitor",
@@ -71,24 +67,10 @@ export default function UserList() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="p-4 flex justify-between items-center">
-        <button
-          onClick={handleBackClick}
-          className="flex items-center text-left text-sm underline font-bold"
-        >
-          <img
-            src="https://www.svgrepo.com/show/535151/arrow-left-to-line.svg"
-            alt="Voltar"
-            className="h-5 w-5 mr-2"
-          />
-          Voltar
-        </button>
-
-        <input type='text' placeholder='Nome do usuário...' className="p-2 border border-slate-400 rounded-md"></input>
-        
-      </div>
-
       <Menu />
+      <div className="p-4 flex justify-between items-center ">
+        <input type='text' placeholder='Nome do usuário...' className="p-2 border border-slate-400 rounded-md"></input> 
+      </div>
 
       <div className="flex-grow flex justify-center py-8">
         <div className="w-full">
