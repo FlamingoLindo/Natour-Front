@@ -1,10 +1,7 @@
 "use client";
-import { useRouter } from 'next/navigation';
 import Menu from '../components/menu';
 
 export default function UserList() {
-  const router = useRouter();
-
   const users = [
     {
       name: "Vitor",
@@ -68,7 +65,7 @@ export default function UserList() {
   return (
     <div className="min-h-screen flex flex-col">
       <Menu />
-      <div className="p-4 flex justify-between items-center ">
+      <div className="p-4 flex justify-between items-center">
         <input type='text' placeholder='Nome do usuário...' className="p-2 border border-slate-400 rounded-md"></input> 
       </div>
 
