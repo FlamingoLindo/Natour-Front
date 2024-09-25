@@ -1,16 +1,26 @@
 import React from "react";
+import { useRouter } from 'next/navigation';
 
-const Menu = () => {
+const Header = () => {
+    const router = useRouter();
+
+    const handleNavigation = (path: string) => {
+        router.push(path); 
+    };
+
     return (
-        <div className="flex bg-green-500 font-bold font-sans text-black space-x-4 p-4">
-            <div>Dashboard</div>
-            <div>Usuários</div>
-            <div>Termos</div>
-            <div>Configurações</div>
-            <div>Doações</div>
-            <div className="absolute right-4">Sair</div>
-        </div>
+        <header className="flex justify-between items-center bg-green-400 p-4 shadow-lg">
+            <link rel="icon" href="/favicon.ico" sizes="any" />
+            <div className="flex space-x-6">
+                <div onClick={() => handleNavigation('/dashboard')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Dashboard</div>
+                <div onClick={() => handleNavigation('/users')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Usuários</div>
+                <div onClick={() => handleNavigation('/terms')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Termos</div>
+                <div onClick={() => handleNavigation('/configs')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Configurações</div>
+                <div onClick={() => handleNavigation('/donate')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Doações</div>
+            </div>
+            <div onClick={() => handleNavigation('/logout')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Sair</div>
+        </header>
     );
 };
 
-export default Menu;
+export default Header;
