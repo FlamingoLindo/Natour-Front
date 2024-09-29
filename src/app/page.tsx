@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
-  const prodLink = 'https://natour-av6f.onrender.com/api/auth/local'; // Defina o link da API
+  const prodLink = 'http://localhost:1337/api/auth/local'; // Defina o link da API
   const router = useRouter();
 
   const [email, setEmail] = useState('');

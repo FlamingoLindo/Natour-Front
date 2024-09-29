@@ -14,9 +14,10 @@ const Header = () => {
             <div className="flex space-x-6">
                 <div onClick={() => handleNavigation('/dashboard')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Dashboard</div>
                 <div onClick={() => handleNavigation('/users')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Usuários</div>
+                <div onClick={() => handleNavigation('/points')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Pontos</div>
                 <div onClick={() => handleNavigation('/terms')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Termos</div>
-                <div onClick={() => handleNavigation('/configs')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Configurações</div>
                 <div onClick={() => handleNavigation('/donate')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Doações</div>
+                <div onClick={() => handleNavigation('/profile')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Perfil</div>
             </div>
             <div onClick={() => handleNavigation('/logout')} className="cursor-pointer font-bold uppercase text-black hover:text-white transition duration-100">Sair</div>
         </header>
