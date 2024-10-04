@@ -33,7 +33,14 @@ export default function Login() {
       });
 
       if (response.ok) {
-        handleNavigation('/dashboard');
+        const data = await response.json();
+        const userId = data.user?.id;
+
+        if (userId === 1) {
+          handleNavigation('/dashboard');
+        } else {
+          toast.error('Email ou senha inválidos!');
+        }
       } else {
         toast.error('Email ou senha inválidos!');
       }
