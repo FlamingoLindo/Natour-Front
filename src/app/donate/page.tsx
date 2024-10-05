@@ -157,7 +157,7 @@ export default function Donates() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSubmit={handleModalSubmit}
-                onReset={handleReset} // Pass the reset function to the modal
+                onReset={handleReset} 
             />
             <ToastContainer />
         </div>

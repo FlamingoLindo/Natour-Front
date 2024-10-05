@@ -41,7 +41,7 @@ export default function Terms() {
     };
 
     return (
-        <div className='bg-zinc-50'>
+        <div>
             <Menu />
 
             <div className='flex justify-center items-center mt-7 gap-x-16'>
@@ -49,7 +49,7 @@ export default function Terms() {
                     <label className='font-bold text-decoration-line: underline decoration-2 py-2'>Termos da Plataforma</label>
                     <textarea
                         id='platafromTerm' 
-                        className='border-2 border-gray-500 min-w-[30rem] min-h-[30rem] shadow-2xl focus:outline-none'
+                        className='border-2 border-black border-opacity-15 min-w-[45rem] min-h-[35rem] shadow-2xl focus:outline-none p-4 rounded-xl'
                         value={terms.platafromTerm}
                         onChange={handleInputChange} 
                     />
@@ -59,7 +59,7 @@ export default function Terms() {
                     <label className='font-bold text-decoration-line: underline decoration-2 py-2'>Termos do Aplicativo</label>
                     <textarea
                         id='appTerm'
-                        className='border-2 border-gray-500 min-w-[30rem] min-h-[30rem] shadow-2xl focus:outline-none'
+                        className='border-2 border-black border-opacity-15 min-w-[45rem] min-h-[35rem] shadow-2xl focus:outline-none p-4 rounded-xl'
                         value={terms.appTerm}
                         onChange={handleInputChange} 
                     />
