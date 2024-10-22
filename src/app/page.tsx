@@ -10,7 +10,7 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // Para mostrar o status de carregamento
+  const [loading, setLoading] = useState(false);
 
   const handleNavigation = (path: string) => {
     router.push(path);
@@ -66,7 +66,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="font-mono mb-10 shadow appearance-none border-2 border-white border-opacity-30 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline focus:ring-4 ring-teal-700"
-          ></input>
+          />
 
           <label className="flex text-lg text-white font-bold font-mono">Senha</label>
           <input
@@ -76,10 +76,10 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="font-mono mb-10 shadow appearance-none border-2 border-white border-opacity-30 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline focus:ring-4 ring-teal-700"
-          ></input>
+          />
 
           <label className="font-mono flex mb-10 underline text-white font-bold">
-            <input type="checkbox" className="mr-2"></input>
+            <input type="checkbox" className="mr-2" />
             Lembrar-me
           </label>
 
@@ -88,7 +88,7 @@ export default function Login() {
             value={loading ? 'Carregando...' : 'Entrar'}
             className="font-mono font-bold text-white border-4 border-opacity-30 py-2 px-16 bg-gradient-to-r from-green-600 hover:bg-green-800 rounded-lg"
             disabled={loading}
-          ></input>
+          />
         </form>
         <ToastContainer />
       </div>

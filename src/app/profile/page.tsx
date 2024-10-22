@@ -1,11 +1,19 @@
 'use client'
 import Menu from '../components/menu';
 import profileIcon from '../assets/profile.svg'
-import letter from '../assets/letter.svg'
+import letter from '../assets/letter.svg';
+// Remover a importação de ChangePasswordModal se não for utilizado
+// import ChangePasswordModal from '../components/changePasswordModal';
+//import { useState } from 'react';
+
+// Remover useState se não for utilizado
+// const [changePasswordData, setChangePasswordData] = useState({password: '', newPassword: '', confPassword: ''});
+// const [isModalOpen, setIsModalOpen] = useState(false);
 
 export default function Profile(){
+
     return (
-        <div>
+        <div className= 'bg-neutral-100 min-h-screen'>
             <Menu />
             
             <div className='flex flex-col items-center mt-20 font-semibold'>
@@ -28,7 +36,7 @@ export default function Profile(){
                 </div>
 
                 <div>
-                    <button className='border-2 border-black rounded-md w-56 p-2'>Redefinir senha</button>
+                    <button className='border-2 border-black bg-white rounded-md w-56 p-2'>Redefinir senha</button>
                 </div>
             </div>
 
