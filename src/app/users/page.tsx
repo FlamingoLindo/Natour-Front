@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { User } from '@/interfaces/userInterface';
 
 import Image from 'next/image';
-import defaultAvatar from '../../Images/TreebeardatIsengard.webp';
+import defaultAvatar from '@/Images/TreebeardatIsengard.webp';
 
 export default function UserList() {
   const router = useRouter();
