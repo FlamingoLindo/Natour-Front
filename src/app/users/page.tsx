@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import { User } from '@/interfaces/userInterface';
 
 import Image from 'next/image';
-import defaultAvatar from '@/Images/TreebeardatIsengard.webp';
 
 export default function UserList() {
   const router = useRouter();
@@ -29,7 +28,6 @@ export default function UserList() {
     router.push(`/users/${userId}`);
   };
   
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Menu />
@@ -58,9 +56,9 @@ export default function UserList() {
                   <td className="border-b-2 border-gray-300 px-6 py-4 text-black">
                     <div className="flex items-center">
                       <Image
-                        src={user.photo?.url ? (user.photo.url.startsWith('http') ? user.photo.url : `http://localhost:1337${user.photo.url}`) : defaultAvatar}
+                        src={user.photo?.url ? (user.photo.url.startsWith('http') ? user.photo.url : `http://localhost:1337${user.photo.url}`) : "https://via.placeholder.com/50"} // Fallback URL
                         alt={`Foto de ${user.username}`}
-                        className="h-[50px] w--[50px] rounded-full mr-4 object-cover"
+                        className="h-[50px] w-[50px] rounded-full mr-4 object-cover" // Fix width syntax
                         width={50} 
                         height={50} 
                       />
