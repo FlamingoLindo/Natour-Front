@@ -1,90 +1,34 @@
 "use client";
-import Menu from '../components/menu';
 
+import { useEffect, useState } from 'react';
+import Menu from '../components/menu';
 import { useRouter } from 'next/navigation';
+import { getUsers } from '@/api/users/users'; 
+import { ToastContainer } from 'react-toastify';
+import { User } from '@/interfaces/userInterface';
+
+import Image from 'next/image';
+import defaultAvatar from '../../Images/TreebeardatIsengard.webp';
 
 export default function UserList() {
-  const router = useRouter()
+  const router = useRouter();
+  const [users, setUsers] = useState<User[]>([]);
 
-  const handleNavigation = (path: string) => {
-    router.push(path)
-  }
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await getUsers();
+      if (data) {
+        setUsers(data);
+      }
+    };
 
-  const users = [
-    {
-      id: 1,
-      name: "Vitor",
-      email: "vitinho@gmail.com",
-      status: "Ativo",
-      statusColor: "bg-green-500",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/68/Lightmatter_flamingo2.jpg",
-    },
-    {
-      id: 2,
-      name: "Emiru",
-      email: "emirumybeloved@gmail.com",
-      status: "Desativado",
-      statusColor: "bg-red-500",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKBd8VentSn5IxLRk_LmrIofFVHduzUOmow&s",
-    },
-    {
-      id: 3,
-      name: "Forsen",
-      email: "forsen@gmail.com",
-      status: "Ativo",
-      statusColor: "bg-green-500",
-      image: "https://cdn.mos.cms.futurecdn.net/58b85585972e0f04b20e1f31ac5e6c75.jpg",
-    },
-    {
-      id: 4,
-      name: "Emoney",
-      email: "loser@gmail.com",
-      status: "Desativado",
-      statusColor: "bg-red-500",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJi6G2kL2MDMgdGYVQskGmbb7tCMZ-SY4aaA&s",
-    },
-    {
-      id: 5,
-      name: "Doc",
-      email: "imgripping@gmail.com",
-      status: "Ativo",
-      statusColor: "bg-green-500",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwlWrMKdKiy1Rtx6Tq4tczwzjg4gFLsYhPEQ&s",
-    },
-    {
-      id: 6,
-      name: "Buh",
-      email: "buh@gmail.com",
-      status: "Desativado",
-      statusColor: "bg-red-500",
-      image: "https://media.tenor.com/Hx5yUAxxYvwAAAAM/buh-b-u-h.gif",
-    },
-    {
-      id: 7,
-      name: "Wixat",
-      email: "wixat@gmail.com",
-      status: "Desativado",
-      statusColor: "bg-red-500",
-      image: "https://static-cdn.jtvnw.net/jtv_user_pictures/255d9e23-8ba3-44d6-9b90-41da9efe762c-profile_image-70x70.png",
-    },
-    {
-      id: 8,
-      name: "REZsix",
-      email: "rezsix@gmail.com",
-      status: "Desativado",
-      statusColor: "bg-red-500",
-      image: "https://static-cdn.jtvnw.net/jtv_user_pictures/8a683bda-a6b4-4ddb-ba0c-d212f197bf69-profile_image-70x70.jpeg",
-    },
-    {
-      id: 9,
-      name: "maaawds",
-      email: "maaawds@gmail.com",
-      status: "Ativo",
-      statusColor: "bg-green-500",
-      image: "https://static-cdn.jtvnw.net/jtv_user_pictures/408e7076-5956-409b-9a01-747b6979aa9c-profile_image-70x70.png",
-    },
-    
-  ];
+    fetchUsers();
+  }, []);
+
+  const handleNavigation = (userId: number) => {
+    router.push(`/users/${userId}`);
+  };
+  
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -110,32 +54,31 @@ export default function UserList() {
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <tr
-                  key={index}
-                  className="hover:bg-gray-100 transition-all duration-200 ease-in-out"
-                >
+                <tr key={index} className="hover:bg-gray-100 transition-all duration-200 ease-in-out">
                   <td className="border-b-2 border-gray-300 px-6 py-4 text-black">
                     <div className="flex items-center">
-                      <img
-                        src={user.image}
-                        alt="Foto"
-                        className="h-12 w-12 rounded-full mr-4 object-fill"
+                      <Image
+                        src={user.photo?.url ? (user.photo.url.startsWith('http') ? user.photo.url : `http://localhost:1337${user.photo.url}`) : defaultAvatar}
+                        alt={`Foto de ${user.username}`}
+                        className="h-[50px] w--[50px] rounded-full mr-4 object-cover"
+                        width={50} 
+                        height={50} 
                       />
-                      <span className="font-medium">{user.name}</span>
+                      <span className="font-medium">{user.username}</span>
                     </div>
                   </td>
                   <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{user.email}</td>
-                  <td className="border-b-2 border-gray-300 px-6 py-4">
+                  <td className="border-b-2 border-gray-300 px-0 py-4">
                     <div
-                      className={`${user.statusColor} rounded-full text-center text-white font-semibold py-1 px-4 shadow-md`}
+                      className={`rounded-full text-center text-white font-semibold py-1 px-[10px] shadow-md ${user.blocked ? 'bg-red-500' : 'bg-green-500'}`}
                     >
-                      {user.status}
+                      {user.blocked ? 'Bloqueado' : 'Ativo'}
                     </div>
                   </td>
                   <td className="border-b-2 border-gray-300 px-6 py-4 text-right">
                     <div
                       className="flex justify-end cursor-pointer"
-                      onClick={() => handleNavigation(`users/${user.id}`)}
+                      onClick={() => handleNavigation(user.id)}
                     >
                       <img
                         src="https://www.svgrepo.com/show/514119/eye.svg"
@@ -150,6 +93,7 @@ export default function UserList() {
           </table>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

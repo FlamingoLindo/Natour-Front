@@ -1,12 +1,20 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Menu from '../../components/menu';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image'
+import { getUserPoints } from '@/api/users/users';
+import { UserPoint } from '@/interfaces/userInterface';
 
 
 export default function UserId() {
   const router = useRouter()
+
+  const { userId } = useParams();
+
+  const [points, setPoints] = useState<UserPoint[]>([]);
+
 
   const handleNavigation = (path: string) => {
     router.push(path)
@@ -18,115 +26,23 @@ export default function UserId() {
     setIsToggled(!isToggled);
   };
 
+  useEffect(() => {
+    if (userId) {
+      const fetchPoints = async () => {
+        const data = await getUserPoints(Number(userId));
+        setPoints(data);
+      };
+      fetchPoints();
+    }
+  }, [userId]);
+
   const user = {
     name: "Hans Eli Sebastian Fors",
     email: "forsen@gmail.com",
     qntPoints: 12
   };
 
-  const points = [
-    {
-      id: 1,
-      name: 'Parque Iberapuera',
-      url: 'parque.com',
-      hourStart: '09:00',
-      hourEnd: '18:00',
-      rating: 5,
-      status: 'Ativo',
-      statusColor: 'bg-green-500'
-    },
-    {
-      id: 2,
-      name: 'Praia de Copacabana',
-      url: 'copacabana.com',
-      hourStart: '06:00',
-      hourEnd: '20:00',
-      rating: 4,
-      status: 'Desativado',
-      statusColor: 'bg-red-500'
-    },
-    {
-      id: 3,
-      name: 'Cristo Redentor',
-      url: 'cristoredentor.com',
-      hourStart: '08:00',
-      hourEnd: '17:00',
-      rating: 5,
-      status: 'Ativo',
-      statusColor: 'bg-green-500'
-    },
-    {
-      id: 4,
-      name: 'Museu do Amanhã',
-      url: 'museuamanha.com',
-      hourStart: '10:00',
-      hourEnd: '18:00',
-      rating: 4,
-      status: 'Desativado',
-      statusColor: 'bg-red-500'
-    },
-    {
-      id: 5,
-      name: 'Pão de Açúcar',
-      url: 'paodeacucar.com',
-      hourStart: '07:00',
-      hourEnd: '19:00',
-      rating: 5,
-      status: 'Ativo',
-      statusColor: 'bg-green-500'
-    },
-    {
-      id: 6,
-      name: 'Jardim Botânico',
-      url: 'jardimbotanico.com',
-      hourStart: '08:00',
-      hourEnd: '17:00',
-      rating: 4,
-      status: 'Desativado',
-      statusColor: 'bg-red-500'
-    },
-    {
-      id: 7,
-      name: 'Lagoa Rodrigo de Freitas',
-      url: 'lagoarodrigo.com',
-      hourStart: '05:00',
-      hourEnd: '22:00',
-      rating: 5,
-      status: 'Ativo',
-      statusColor: 'bg-green-500'
-    },
-    {
-      id: 8,
-      name: 'Praia do Arpoador',
-      url: 'arpoador.com',
-      hourStart: '06:00',
-      hourEnd: '20:00',
-      rating: 4,
-      status: 'Desativado',
-      statusColor: 'bg-red-500'
-    },
-    {
-      id: 9,
-      name: 'Escadaria Selarón',
-      url: 'escadariaselaron.com',
-      hourStart: '09:00',
-      hourEnd: '19:00',
-      rating: 4,
-      status: 'Ativo',
-      statusColor: 'bg-green-500'
-    },
-    {
-      id: 10,
-      name: 'Maracanã',
-      url: 'maracana.com',
-      hourStart: '09:00',
-      hourEnd: '17:00',
-      rating: 5,
-      status: 'Desativado',
-      statusColor: 'bg-red-500'
-    }
-];
-
+  
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 relative">
       <Menu />
@@ -147,11 +63,13 @@ export default function UserId() {
       </div>
 
       <div className="flex mt-20 ml-8">
-        <div className="w-52 h-52 border-[3.5px] border-gray-300 shadow-lg rounded-lg overflow-hidden flex items-center justify-center">
-          <img 
+        <div className="w-[200px] h-[200px] border-[3.5px] border-gray-300 shadow-lg rounded-lg overflow-hidden flex items-center justify-center">
+          <Image 
             src="https://cdn.mos.cms.futurecdn.net/58b85585972e0f04b20e1f31ac5e6c75.jpg"
             className="object-cover w-full h-full"
             alt="User"
+            width={200}
+            height={200}
           />
         </div>
 
@@ -184,24 +102,26 @@ export default function UserId() {
                 </tr>
               </thead>
               <tbody>
-                {points.map((point, index) => (
+                {points.map((points, index) => (
                   <tr 
                   key={index}
                   className="hover:bg-gray-100 transition-all duration-200 ease-in-out"
                   >
-                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{point.name}</td>
-                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{point.url}</td>
-                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{point.hourStart} / {point.hourEnd}</td>
-                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{point.rating}</td>
+                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{points.name}</td>
+                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black"><a href={points.websiteURL} target="_blank">{points.websiteURL}</a></td>
+                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{points.businessHourStart} / {points.businessHourEnd}</td>
+                    <td className="border-b-2 border-gray-300 px-6 py-4 text-black">{points.rating}</td>
                     <td className="border-b-2 border-gray-300 px-6 py-4 text-black">
-                      <div className={`${point.statusColor} rounded-full text-center text-white font-semibold py-1 px-4 shadow-md`}>
-                        {point.status}
-                      </div>
+                    <div
+                      className={`rounded-full text-center text-white font-semibold py-1 px-[10px] shadow-md ${points.active ? 'bg-red-500' : 'bg-green-500'}`}
+                    >
+                      {points.active ? 'Bloqueado' : 'Ativo'}
+                    </div>
                     </td>
                     <td className="border-b-2 border-gray-300 px-6 py-4 text-black">
                     <div
                       className="cursor-pointer"
-                      onClick={() => handleNavigation(`points/${point.id}`)}
+                      onClick={() => handleNavigation(`points/${points.id}`)}
                     >
                       <img
                         src="https://www.svgrepo.com/show/514119/eye.svg"

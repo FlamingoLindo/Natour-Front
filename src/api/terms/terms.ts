@@ -20,7 +20,7 @@ export const getTerms = async () => {
     }
 };
 
-export const updateTerms = async (platafromTerm: string, appTerm: string) => {
+export const updateTerms = async (platafromTerm: string, privacyPolitics: string) => {
     try {
         const response = await fetch(`${apiUrl}/terms/1`, {
             method: 'PUT',
@@ -30,7 +30,7 @@ export const updateTerms = async (platafromTerm: string, appTerm: string) => {
             body: JSON.stringify({
                 data: {
                     platafromTerm,
-                    appTerm,
+                    privacyPolitics,
                 }
             }),
         });

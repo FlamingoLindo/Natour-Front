@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 
 export default function Terms() {
 
-    const [terms, setTerms] = useState({platafromTerm: '', appTerm: ''})
+    const [terms, setTerms] = useState({platafromTerm: '', privacyPolitics: ''})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,7 +17,7 @@ export default function Terms() {
                     const activeTerms = data.data.attributes;
                     setTerms({
                         platafromTerm: activeTerms.platafromTerm,  
-                        appTerm: activeTerms.appTerm,
+                        privacyPolitics: activeTerms.privacyPolitics,
                     });
                 }
             } catch (error){
@@ -36,8 +36,8 @@ export default function Terms() {
     };
 
     const handleEditClick = async () => {
-        const { platafromTerm, appTerm } = terms;
-        await updateTerms(platafromTerm, appTerm); 
+        const { platafromTerm, privacyPolitics } = terms;
+        await updateTerms(platafromTerm, privacyPolitics); 
     };
 
     return (
@@ -56,11 +56,11 @@ export default function Terms() {
                 </div>
 
                 <div className='flex flex-col items-start font-sans'>
-                    <label className='font-bold text-decoration-line: underline decoration-2 py-2'>Termos do Aplicativo</label>
+                    <label className='font-bold text-decoration-line: underline decoration-2 py-2'>Política de privacidade</label>
                     <textarea
-                        id='appTerm'
+                        id='privacyPolitics'
                         className='border-2 border-black border-opacity-15 min-w-[45rem] min-h-[35rem] shadow-2xl focus:outline-none p-4 rounded-xl'
-                        value={terms.appTerm}
+                        value={terms.privacyPolitics}
                         onChange={handleInputChange} 
                     />
                 </div>
