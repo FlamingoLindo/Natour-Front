@@ -9,7 +9,11 @@ export interface User {
 }
 
 export interface UserPoint {
-    id: number,
+    username: string;
+    email: string;
+    photo: string | null;
+    blocked: boolean;
+    id: number;
     name: string;
     websiteURL: string;
     businessHourStart: string;

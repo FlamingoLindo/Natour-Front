@@ -13,6 +13,10 @@ interface UserResponse {
 }
 
 interface UserPointResponse {
+    username: string;
+    email: string;
+    photo: string | null;
+    blocked: boolean,
     id: number,
     name: string;
     websiteURL: string;
@@ -47,28 +51,41 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 export const getUserPoints = async (userId: number): Promise<UserPoint[]> => {
-    try {
-      const response = await fetch(`http://localhost:1337/api/users/${userId}?populate=points`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch user points');
-      }
-  
-      const data = await response.json();
-      const points: UserPointResponse[] = data.points;
-      return points.map((point) => ({
-        id: point.id,
-        name: point.name,
-        websiteURL: point.websiteURL,
-        businessHourStart: point.businessHourStart,
-        businessHourEnd: point.businessHourEnd,
-        rating: 0, // Assuming rating is not provided in the response
-        active: point.active, // Use the `active` field directly
-      }));
-    } catch (error) {
-      toast.error('Houve um erro com os pontos!');
-      console.error(error);
-      return [];
+  try {
+    const response = await fetch(
+      `http://localhost:1337/api/users/${userId}?populate[photo][fields]=id&populate[photo][fields]=name&populate[photo][fields]=url&populate[points]=*&populate[ratings]=*`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user points");
     }
-  };
-  
+
+    const data = await response.json();
+
+    // Extract user data from the response (this is the top-level user information)
+    const { username, email, photo, blocked } = data; // Get user details
+    const photoUrl = photo ? `http://localhost:1337${photo.url}` : null; // Build full photo URL
+
+    const points: UserPointResponse[] = data.points || []; // Ensure points exists
+
+    // Return the points along with the user information
+    return points.map((point) => ({
+      username, 
+      email,    
+      photo: photoUrl, 
+      blocked,
+      id: point.id,
+      name: point.name,
+      websiteURL: point.websiteURL,
+      businessHourStart: point.businessHourStart,
+      businessHourEnd: point.businessHourEnd,
+      rating: point.rating,
+      active: point.active,
+    }));
+  } catch (error) {
+    toast.error("Houve um erro com os pontos!");
+    console.error(error);
+    return [];
+  }
+};
+
